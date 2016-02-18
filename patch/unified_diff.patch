@@ -1,0 +1,12 @@
+diff --git a/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml b/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
+index 1d0f0f0..29c5f50 100644
+--- a/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
++++ b/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
+@@ -146,6 +146,7 @@ EditableGridDelegate {
+         if (switcherRoot.closeApplicationEnabled) {
+             switcherRoot.closeApplicationEnabled = false;
+         } else if (running) {
++            switcherRoot.minimizeLaunchingWindows()
+             minimized = false
+             Lipstick.compositor.windowToFront(wrapper.windowId)
+         } else if (launcherItem) {

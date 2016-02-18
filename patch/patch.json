@@ -1,0 +1,8 @@
+{
+    "name": "Don't steal focus",
+    "description": "Minimize all launching windows when switching to an app",
+    "category": "homescreen",
+    "infos": {
+        "maintainer": "cornerman"
+    }
+}
