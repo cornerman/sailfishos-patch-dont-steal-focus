@@ -1,8 +1,8 @@
 diff --git a/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml b/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
-index 1d0f0f0..29c5f50 100644
+index 1d0f0f0..445d502 100644
 --- a/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
 +++ b/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
-@@ -146,6 +146,7 @@ EditableGridDelegate {
+@@ -146,10 +146,12 @@ EditableGridDelegate {
          if (switcherRoot.closeApplicationEnabled) {
              switcherRoot.closeApplicationEnabled = false;
          } else if (running) {
@@ -10,3 +10,20 @@ index 1d0f0f0..29c5f50 100644
              minimized = false
              Lipstick.compositor.windowToFront(wrapper.windowId)
          } else if (launcherItem) {
+             // App is not running. Launch it now.
++            switcherRoot.minimizeLaunchingWindows()
+             launching = true
+             minimized = false
+             switcherRoot.launchingItem = wrapper
+@@ -342,7 +344,10 @@ EditableGridDelegate {
+                             Behavior on opacity { FadeAnimation {} }
+                         }
+ 
+-                        onClicked: coverActionModel.trigger(model.id)
++                        onClicked: {
++                            coverActionModel.trigger(model.id)
++                            switcherRoot.minimizeLaunchingWindows()
++                        }
+                     }
+                 }
+             }
