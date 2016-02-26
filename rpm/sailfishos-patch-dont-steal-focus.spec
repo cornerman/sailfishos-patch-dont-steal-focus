@@ -1,7 +1,7 @@
 Name: sailfishos-patch-dont-steal-focus
 BuildArch: noarch
 Summary: Minimize all launching windows when switching to an app
-Version: 0.0.1
+Version: 0.0.2
 Release: 1
 Group: System/Patches
 License: TODO
