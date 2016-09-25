@@ -1,57 +1,8 @@
 diff --git a/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml b/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
-index 1d0f0f0..b2aef57 100644
+index b6c281a..afd7208 100644
 --- a/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
 +++ b/usr/share/lipstick-jolla-home-qt5/switcher/SwitcherItem.qml
-@@ -119,26 +119,6 @@ EditableGridDelegate {
-         }
-     }
- 
--    Connections {
--        target: wrapper.currentApp ? Lipstick.compositor : null
--        ignoreUnknownSignals: true
--        onHomePeekingChanged: {
--            if (Lipstick.compositor.homePeeking && !wrapper.closing) {
--                contentItem.opacity = 0.0
--                homePeekAnimation.restart()
--            }
--        }
--    }
--    SequentialAnimation {
--        id: homePeekAnimation
--        PauseAnimation { duration: 200 }
--        FadeAnimation {
--            target: contentItem
--            duration: 400
--            to: 1.0
--        }
--    }
--
-     property bool hideCover: wrapper.launching || startupTimer.running
-     property real coverOpacity: hideCover ? 0.0 : (!running ? 0.6 : 1.0)
- 
-@@ -146,10 +126,12 @@ EditableGridDelegate {
-         if (switcherRoot.closeApplicationEnabled) {
-             switcherRoot.closeApplicationEnabled = false;
-         } else if (running) {
-+            switcherRoot.minimizeLaunchingWindows()
-             minimized = false
-             Lipstick.compositor.windowToFront(wrapper.windowId)
-         } else if (launcherItem) {
-             // App is not running. Launch it now.
-+            switcherRoot.minimizeLaunchingWindows()
-             launching = true
-             minimized = false
-             switcherRoot.launchingItem = wrapper
-@@ -244,7 +226,7 @@ EditableGridDelegate {
-     Rectangle {
-         color: Theme.highlightBackgroundColor
-         anchors.fill: parent
--        opacity: ((currentApp && !Lipstick.compositor.homePeeking) || windowMapPending || launching || wrapper.closing) ? 0.4 : (contentItem.pressed ? Theme.highlightBackgroundOpacity : 0)
-+        opacity: (currentApp || windowMapPending || (launching && !minimized) || wrapper.closing) ? 0.4 : (contentItem.pressed ? Theme.highlightBackgroundOpacity : 0)
-         radius: windowPixmap.radius
-         Behavior on opacity {
-             enabled: !contentItem.pressed
-@@ -342,7 +324,10 @@ EditableGridDelegate {
+@@ -327,7 +327,10 @@ EditableGridDelegate {
                              Behavior on opacity { FadeAnimation {} }
                          }
  

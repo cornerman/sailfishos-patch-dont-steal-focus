@@ -1,5 +1,5 @@
 # Don't steal focus
 
-Only tested with SailfishOS 2.0.1.7
+Based on SailfishOS 2.0.2.48/2.0.2.51
 
-Minimize all launching windows whenever you switch to an app, so a newly launched window does not steal the current focus.
+Minimize all launching windows whenever you click on a cover action of an app, so another window does not steal the focus.
